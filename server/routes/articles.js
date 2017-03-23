@@ -5,10 +5,10 @@ var express = require('express');
 var router = express.Router();
 var ArticleController = require('../controllers/ArticleController')
 
-router.get('/',  ArticlesController.getArticles)
-router.get('/:id',  ArticlesController.getArticle)
-router.post('/', ArticlesController.createArticle)
-router.put('/:id', ArticlesController.updateArticle)
-router.delete('/:id', ArticlesController.deleteArticle)
+router.get('/',  ArticleController.getArticles)
+router.get('/:id',  ArticleController.getArticle)
+router.post('/', ArticleController.createArticle)
+router.put('/:id', ArticleController.updateArticle)
+router.delete('/:id', ArticleController.deleteArticle)
 
 module.exports = router;

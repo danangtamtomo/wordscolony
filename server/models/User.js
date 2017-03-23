@@ -10,8 +10,6 @@ var userSchema = mongoose.Schema({
   email: String,
   fullname: String,
   salt: String,
-  address: String,
-  phone: String,
 }, {
   timestamps: true
 })
