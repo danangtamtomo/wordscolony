@@ -20,6 +20,16 @@
         content: '',
         author: ''
       }
+    },
+    methods: {
+      createArticle () {
+        this.$http.post('http://localhost/article', {
+          title: this.title
+        })
+          .then((response) => {
+
+          })
+      }
     }
   }
 </script>
