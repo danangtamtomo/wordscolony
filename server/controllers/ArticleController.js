@@ -14,7 +14,7 @@ Articles.getArticles = function (req, res, next) {
 }
 
 Articles.getArticle = function (req, res, next) {
-  Article.find({id: req.params.id})
+  Article.findOne({id: req.params._id})
     .populate('author')
     .then(function (article) {
       res.send(article)
