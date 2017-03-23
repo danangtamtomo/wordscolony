@@ -14,11 +14,11 @@ var userSchema = mongoose.Schema({
   timestamps: true
 })
 
-userSchema.methods.validPassword =function (password) {
+userSchema.methods.validPassword = function (password) {
   const hash = crypto.createHmac('sha256', password)
     .update(this.salt)
 
-  if (this.password !== hash.digest('hex')) {
+  if (User.password !== hash.digest('hex')) {
     return false
   }
 
@@ -36,5 +36,6 @@ userSchema.pre('save', function (next) {
 })
 
 var User = mongoose.model('User', userSchema)
+
 
 module.exports = User

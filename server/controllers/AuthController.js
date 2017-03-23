@@ -3,20 +3,19 @@
  */
 
 const User = require('../models/User')
+const jwt = require('jsonwebtoken')
+
 
 var Auths = {}
 
 Auths.doLogin = function(req, res, next) {
-  var token = jwt.sign({
-    user: req.user.id
-  }, 'danangtamtomo')
-  req.user.getProfile()
-    .then(function(userProfile) {
-      res.send({
-        message: 'Login success, welcome ' + userProfile.fullname,
-        token: token,
-      })
-    })
+  var token = jwt.sign({user: req.user.id }, 'danangtamtomo')
+
+  res.send({
+    message: 'Login success, welcome',
+    token: token
+  })
+
 }
 
 Auths.failureLogin = function (req, res, next) {

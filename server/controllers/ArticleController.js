@@ -7,6 +7,7 @@ var Articles = {}
 
 Articles.getArticles = function (req, res, next) {
   Article.find({})
+    .populate('author')
     .then(function (articles) {
       res.send(articles)
     })
@@ -14,6 +15,7 @@ Articles.getArticles = function (req, res, next) {
 
 Articles.getArticle = function (req, res, next) {
   Article.find({id: req.params.id})
+    .populate('author')
     .then(function (article) {
       res.send(article)
     })
