@@ -5,16 +5,22 @@ var logger = require('morgan')
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 var cors = require('cors')
+var mongoDbConnection = require('./configs/db/mongodb')
 
-var index = require('./routes/index')
+var auth = require('./routes/auth')
 var users = require('./routes/users')
-var answers = require('./routes/articles')
+var articles = require('./routes/articles')
 
 var session = require('express-session')
 
 var LocalStrategy = require('./strategies/LocalStrategy')
 var app = express()
 app.use(cors())
+
+mongoDbConnection.on('error', console.error.bind(console, 'connection error:'))
+mongoDbConnection.once('open', function () {
+  console.log('Mongodb is connected')
+})
 
 
 // uncomment after placing your favicon in /public
@@ -35,10 +41,9 @@ app.use(cookieParser())
 app.use(LocalStrategy.initialize())
 app.use(LocalStrategy.session())
 
-app.use('/', index)
+app.use('/auth', auth)
 app.use('/user', users)
-app.use('/question', questions)
-app.use('/answer', answers)
+app.use('/article', articles)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
