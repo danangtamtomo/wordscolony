@@ -10,12 +10,18 @@ Users.getUsers = function (req, res, next) {
     .then(function (users) {
       res.send(users)
     })
+    .catch(function (err) {
+      console.log(err.message)
+    })
 }
 
 Users.getUser = function (req, res, next) {
   User.find({id: req.params.id})
     .then(function (user) {
       res.send(user)
+    })
+    .catch(function (err) {
+      console.log(err.message)
     })
 }
 

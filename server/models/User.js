@@ -14,6 +14,17 @@ var userSchema = mongoose.Schema({
   timestamps: true
 })
 
+userSchema.methods.validPassword =function (password) {
+  const hash = crypto.createHmac('sha256', password)
+    .update(this.salt)
+
+  if (this.password !== hash.digest('hex')) {
+    return false
+  }
+
+  return true
+}
+
 userSchema.pre('save', function (next) {
   var salt = crypto.randomBytes(10).toString('hex')
   const password = this.password

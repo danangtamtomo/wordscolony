@@ -19,9 +19,14 @@ Auths.doLogin = function(req, res, next) {
     })
 }
 
+Auths.failureLogin = function (req, res, next) {
+  res.send({
+    message: 'Login Failure'
+  })
+}
+
 
 Auths.verifyToken = function (req, res, next) {
-
 
 }
 

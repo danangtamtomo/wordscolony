@@ -4,9 +4,15 @@
 var express = require('express');
 var router = express.Router();
 const AuthController = require('../controllers/AuthController')
+const LocalStrategy = require('../strategies/LocalStrategy')
+
 
 router.get('/verify/:token', AuthController.verifyToken);
 
-router.post('/login', AuthController.doLogin);
+router.get('/login', AuthController.failureLogin)
+
+router.post('/login', LocalStrategy.authenticate('local', {
+  failureRedirect: '/auth/login'
+}), AuthController.doLogin);
 
 module.exports = router;
